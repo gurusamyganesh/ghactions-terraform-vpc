@@ -1,6 +1,5 @@
-terraform {
-  required_version = ">= 1.2.0"
-  region = "us-east-2"
+provider "aws" {
+  region = "us-east-1"
 }
 
 resource "aws_vpc" "main" {
