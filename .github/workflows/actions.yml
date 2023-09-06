@@ -19,7 +19,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./terraform
+        working-directory: .
     steps:
       - name: 'Checkout from git'
         uses: actions/checkout@v3
@@ -31,9 +31,8 @@ jobs:
           
       - name: Terraform init
         id: init
-        run: terraform init
+        run: terraform init 
 
       - name: Terraform plan
         id: plan
-        # run: terraform plan -no-color -input=false
-        run: ls -lt
+        run: terraform plan        
