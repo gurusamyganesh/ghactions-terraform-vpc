@@ -38,9 +38,4 @@ jobs:
       - name: Terraform apply
         if: steps.plan.outcome == 'success'
         id: apply
-        run: terraform apply -input=false -no-color -auto-approve
-
-      - name: Terraform destory
-        if: steps.apply.outcome == 'success'
-        id: destory
-        run: terraform destory -input=false -no-color -auto-approve        
+        run: terraform apply -input=false -no-color -auto-approve    
