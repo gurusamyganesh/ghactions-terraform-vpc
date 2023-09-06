@@ -38,4 +38,4 @@ jobs:
       - name: Terraform apply
         if: steps.plan.outcome == 'success'
         id: apply
-        run: terraform apply -input=false -no-color        
+        run: terraform apply -input=false -no-color -auto-approve
