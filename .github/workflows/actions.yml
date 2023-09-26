@@ -40,6 +40,13 @@ jobs:
         id: apply
         run: terraform apply -input=false -no-color -auto-approve
 
+      - name: Get VPC Id
+        if: steps.apply.outcome == 'success'
+        id: getID
+        run: |
+          output=$(terraform output vpc_id123)
+          echo $output
+
       - name: Terraform destroy
         if: steps.apply.outcome == 'success'
         id: destroy
