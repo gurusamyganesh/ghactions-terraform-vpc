@@ -53,7 +53,16 @@ jobs:
         run: |
           echo "#######################" ${{steps.getID.outputs.VPC_ID}}
 
+      - name: Terraform subnet init
+        id: subnet-init
+        run: terraform chdir="./modules/subnet" init -input=false
+
+      - name: Terraform subnet plan
+        if: steps.subnet-init.outcome == 'success'
+        id: subnet-plan
+        run: terraform chdir="./modules/subnet" plan -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color
+
       - name: Terraform destroy
-        if: steps.apply.outcome == 'success'
+        if: steps.subnet-plan.outcome == 'success'
         id: destroy
         run: terraform destroy -input=false -no-color -auto-approve            
