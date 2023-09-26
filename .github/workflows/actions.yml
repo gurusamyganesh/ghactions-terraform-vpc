@@ -45,14 +45,15 @@ jobs:
         id: getID
         run: |
           output=$(terraform output vpc_id123)
-          echo $output >> $GITHUB_OUTPUT
+          echo "VPC_ID="$output >> $GITHUB_OUTPUT
+          echo "count1=5" >> $GITHUB_OUTPUT
 
       - name: print vpc id
         if: steps.apply.outcome == 'success'
         id: printid
         run: |
-          echo "#######################" ${{steps.getID.outputs.VPC_ID}}
-          echo "#######################" ${{steps.getID.outputs.count1}}
+          echo ${{steps.getID.outputs.VPC_ID}}
+          echo ${{steps.getID.outputs.count1}}
           
       # - name: Terraform subnet init
       #   id: subnet-init
