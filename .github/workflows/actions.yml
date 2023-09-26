@@ -43,4 +43,4 @@ jobs:
       - name: Terraform destroy
         if: steps.apply.outcome == 'success'
         id: destroy
-        run: terraform destory -input=false -no-color -auto-approve            
+        run: terraform destroy -input=false -no-color -auto-approve            
