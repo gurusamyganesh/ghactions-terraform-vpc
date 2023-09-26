@@ -11,8 +11,9 @@ resource "aws_subnet" "private_subnet" {
   cidr_block = "10.0.1.0/24"
   map_customer_owned_ip_on_launch = "false"
   availability_zone = "eu-west-2a"
-  tags {
-    Name = "subnet for gitactions"
+
+  tags = {
+    Name = "Private Subnet"
   }
 }
 
