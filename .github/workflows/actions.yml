@@ -45,7 +45,7 @@ jobs:
         id: getID
         run: |
           output=$(terraform output vpc_id123)
-          echo "VPC_ID="$output | xargs >> $GITHUB_OUTPUT
+          echo "VPC_ID="$output | tr -d '\n' >> $GITHUB_OUTPUT
           echo "count1=5" >> $GITHUB_OUTPUT
 
       - name: print vpc id
