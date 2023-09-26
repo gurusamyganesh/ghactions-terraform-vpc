@@ -12,7 +12,7 @@ resource "aws_subnet" "private_subnet" {
   map_customer_owned_ip_on_launch = "false"
   availability_zone = "eu-west-2a"
   tags {
-    name = "subnet for gitactions"
+    Name = "subnet for gitactions"
   }
 }
 
