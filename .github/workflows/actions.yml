@@ -45,7 +45,7 @@ jobs:
         id: getID
         run: |
           output=$(terraform output vpc_id123)
-          echo "VPC_ID="$output | tr -d '\n' >> $GITHUB_OUTPUT
+          echo "VPC_ID="$output >> $GITHUB_OUTPUT
           echo "count1=5" >> $GITHUB_OUTPUT
 
       - name: print vpc id
@@ -55,19 +55,19 @@ jobs:
           echo ${{steps.getID.outputs.VPC_ID}}
           echo ${{steps.getID.outputs.count1}}
           
-      # - name: Terraform subnet init
-      #   id: subnet-init
-      #   run: terraform -chdir="./module/subnet" init -input=false
+      - name: Terraform subnet init
+        id: subnet-init
+        run: terraform -chdir="./module/subnet" init -input=false
 
-      # - name: Terraform subnet plan
-      #   if: steps.subnet-init.outcome == 'success'
-      #   id: subnet-plan
-      #   run: terraform -chdir="./module/subnet" plan -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color
+      - name: Terraform subnet plan
+        if: steps.subnet-init.outcome == 'success'
+        id: subnet-plan
+        run: terraform -chdir="./module/subnet" plan -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color
 
-      # - name: Terraform subnet apply
-      #   if: steps.subnet-plan.outcome == 'success'
-      #   id: subnet-apply
-      #   run: terraform -chdir="./module/subnet" apply -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color -auto-approve
+      - name: Terraform subnet apply
+        if: steps.subnet-plan.outcome == 'success'
+        id: subnet-apply
+        run: terraform -chdir="./module/subnet" apply -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color -auto-approve
 
       - name: Terraform destroy
         if: steps.apply.outcome == 'success'
