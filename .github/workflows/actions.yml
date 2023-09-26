@@ -60,12 +60,12 @@ jobs:
       - name: Terraform subnet plan
         if: steps.subnet-init.outcome == 'success'
         id: subnet-plan
-        run: terraform -chdir="./module/subnet" plan -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color -auto-approve
+        run: terraform -chdir="./module/subnet" plan -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color
 
       - name: Terraform subnet apply
         if: steps.subnet-plan.outcome == 'success'
         id: subnet-apply
-        run: terraform -chdir="./module/subnet" apply -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color
+        run: terraform -chdir="./module/subnet" apply -var "vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}}" -input=false -no-color -auto-approve
 
       - name: Terraform destroy
         if: steps.subnet-plan.outcome == 'success'
