@@ -13,7 +13,7 @@ terraform {
 resource "aws_subnet" "private_subnet" {
   vpc_id = var.vpc_id_for_subnet
   cidr_block = "10.0.1.0/24"
-  availability_zone = "eu-west-2a"
+  availability_zone = "us-east-2a"
 
   tags = {
     Name = "Private Subnet"
