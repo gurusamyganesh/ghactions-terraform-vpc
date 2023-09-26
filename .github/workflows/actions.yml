@@ -47,6 +47,8 @@ jobs:
           output=$(terraform output vpc_id123)
           echo $output
           echo "VPC_ID="$output >> $GITHUB_OUTPUT
+          echo "count=5" >> $GITHUB_OUTPUT
+          echo $GITHUB_OUTPUT
 
       - name: print vpc id
         if: steps.apply.outcome == 'success'
