@@ -64,8 +64,8 @@ jobs:
         if: steps.apply.outcome == 'success'
         id: getID
         run: |
-          subnetStr="private_subnet_ids="$(terraform output user_names)
-          subnetStr=${subnetStr/"%0A"/""}
+          subnetStr='private_subnet_ids='$(terraform output user_names)
+          subnetStr=${subnetStr/'%0A'/''}
           echo $subnetStr >> $GITHUB_OUTPUT
           # output="VPC_ID="$(terraform output vpc_id123)
           # output1=${output/"%0A"/""}
