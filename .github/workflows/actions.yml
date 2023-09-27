@@ -65,8 +65,8 @@ jobs:
         id: getID
         run: |
           output="VPC_ID="$(terraform output vpc_id123)
-          output=${output/"%0A"/""}
-          echo output >> $GITHUB_OUTPUT
+          output1=${output/"%0A"/""}
+          echo $output1 >> $GITHUB_OUTPUT
 
       - name: print vpc id
         if: steps.apply.outcome == 'success'
