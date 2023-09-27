@@ -23,3 +23,15 @@ resource "aws_subnet" "private_subnet" {
 output "subnet_id123" {
   value = aws_subnet.private_subnet.id
 }
+
+resource "null_resource" "users" {
+  for_each = toset(var.user_names)
+
+  triggers = {
+    name = each.value
+  }
+}
+
+output "user_names_output" {
+  value = [for user in null_resource.users : user.triggers.name]
+}
