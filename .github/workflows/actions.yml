@@ -92,7 +92,7 @@ jobs:
         if: steps.subnet-plan.outcome == 'success'
         id: subnet-apply
         run: |
-          terraform -chdir="./module/subnet" apply -var vpc_id_for_subnet=${{steps.getID.outputs.VPC_ID}} -input=false -no-color -auto-approve
+          terraform -chdir="./module/subnet" apply -var vpc_id_for_subnet="${{steps.getID.outputs.VPC_ID}}" -input=false -no-color -auto-approve
 
       - name: Terraform destroy
         if: steps.apply.outcome == 'success'
