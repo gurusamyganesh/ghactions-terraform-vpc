@@ -48,6 +48,7 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     environment: prod
+    needs: deploy-dev
     defaults:
       run:
         shell: bash
